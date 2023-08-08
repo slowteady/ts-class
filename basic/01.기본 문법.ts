@@ -159,3 +159,10 @@ function catOrDog(a: Cat | Dog): a is Dog {
 // 객체의 프로퍼티가 많을 때
 type E = { [key: string]: string };
 const aaa: E = { a: "a", b: "b", c: "c" };
+
+// 제네릭
+// 사용할 떄 타입이 정해짐
+// extends 키워드를 사용하여 타입 제한 가능
+function q<T extends number | string>(x: T, y: T): T {
+  return x;
+}
