@@ -42,4 +42,29 @@ const ODirection = {
 } as const;
 
 const obj2 = { a: "123", b: "hello", c: "world" } as const;
-type key = typeof obj2[keyof typeof obj2];
+type key = (typeof obj2)[keyof typeof obj2];
+
+// 잉여 속성 검사 : 타입 부여를 하고 객체를 바로 할당할 시, 잉여 속성 검사가 진행된다.
+interface A {
+  a: string;
+}
+const obj3 = { a: "hello", b: "world" };
+// const obj4: A = { a: "hello", b: "world" } // error
+
+// void
+// 직접 return 값에 void 할당 시 return 값이 없다는 것을 의미
+function aa(callback: () => void): void {}
+
+// 매개변수와 메소드로 사용했을 때의 void는 리턴값이 뭐든 상관 않겠다는 의미,
+// 이용하게 되면 타입이 꼬이게 되므로 원칙적으로는 리턴을 사용하지 않하는 것을 지향
+aa(() => {
+  return "3";
+});
+interface Human {
+  talk: () => void;
+}
+const human: Human = {
+  talk() {
+    return 123;
+  },
+};
