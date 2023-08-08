@@ -68,3 +68,11 @@ const human: Human = {
     return 123;
   },
 };
+
+// any 타입은 이후 타입 검사를 하지 않아버리기 때문에
+// 당장 타입을 잘 모르겠을 땐 unknown을 사용
+try {
+} catch (error) {
+  // error.message => 'error' is of type 'unknown' 에러 출력
+  (error as Error).message;
+}
