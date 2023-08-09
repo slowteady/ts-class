@@ -160,6 +160,7 @@ function catOrDog(a: Cat | Dog): a is Dog {
 
 // 11. 인덱스드 시그니쳐
 // 객체의 프로퍼티가 많을 때
+// 인덱스드 시그니쳐를 사용하면 간단하게 타입을 지정할 수 있다.
 type E = { [key: string]: string };
 const aaa: E = { a: "a", b: "b", c: "c" };
 
