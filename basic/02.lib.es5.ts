@@ -51,3 +51,17 @@ interface Arr3<T> {
 }
 const a3: Arr3<number | string> = ["1", 2, 3, "4"];
 a3.filter((arr): arr is string => typeof arr === "string");
+
+// 06. 공변성
+// 리턴값이 좁은타입을 더 넓은 타입에 할당이 가능하다. 반대는 불가
+// 매개변수는 넓은 타입이 좁은 타입에 할당이 가능
+function aa(x: string): number {
+  return +x;
+}
+type BB = (x: string) => number | string;
+const bb: BB = aa;
+
+// 07. 오버로딩
+// 매개변수를 다르게하여 같은 이름의 함수를 다르게 사용 가능
+declare function plus(x: number): number;
+declare function plus(x: number, y: number): number;
