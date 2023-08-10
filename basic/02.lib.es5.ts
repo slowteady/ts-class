@@ -65,3 +65,12 @@ const bb: BB = aa;
 // 매개변수를 다르게하여 같은 이름의 함수를 다르게 사용 가능
 declare function plus(x: number): number;
 declare function plus(x: number, y: number): number;
+
+// 08. 에러 처리 법
+// any와 as의 사용은 지양하는 것이 좋지만, unknown 타입일 때는 as를 사용할 수 밖에 없다.
+// declare const axios: Axios;
+try {
+  // axios.get();
+} catch (err: unknown) {
+  // console.error((err as Error).response?.data);
+}
