@@ -68,6 +68,9 @@ declare function plus(x: number, y: number): number;
 
 // 08. 에러 처리 법
 // any와 as의 사용은 지양하는 것이 좋지만, unknown 타입일 때는 as를 사용할 수 밖에 없다.
+// => interface를 타입가드에 사용할 수 없기 때문에 class와 if(err instanceof Error) 를 사용하면
+// as를 사용하지 않고도 타입 검증이 가능하다.
+
 // declare const axios: Axios;
 try {
   // axios.get();
