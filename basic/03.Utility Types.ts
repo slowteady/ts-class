@@ -33,8 +33,10 @@ const sample2: Omit<Profile, "married"> = {
 // 03. Pick
 // 재사용할 인터페이스의 특정 프로퍼티를 추가하여 사용
 // 전체를 기준으로 사용할 프로퍼티 명시
-const sample3: Pick<Profile, "name" | "age"> = {
+type P3<T, S extends keyof T> = {
+  [Key in S]: T[Key];
+};
+const sample3: P3<Profile, "name" | "age"> = {
   name: "Lee",
   age: 28,
 };
-
