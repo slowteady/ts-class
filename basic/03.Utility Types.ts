@@ -8,11 +8,6 @@ interface Profile {
   married: boolean;
 }
 
-interface NewProfile {
-  name: string;
-  age: number;
-}
-
 type P<T> = {
   [key in keyof T]?: T[key];
 };
