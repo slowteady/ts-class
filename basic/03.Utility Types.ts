@@ -3,7 +3,7 @@
 // 전체 프로퍼티를 optional로 바꾸기 때문에
 // 프로퍼티 검증을 정확하게 하지 못한다는 단점 존재
 interface Profile {
-  name: string;
+  name?: string;
   age: number;
   married: boolean;
 }
@@ -20,6 +20,7 @@ const sample: P<Profile> = {
 // 02. Omit
 // 재사용할 인터페이스의 특정 프로퍼티를 제외하여 사용
 // 전체에서 특정 프로퍼티 제외
+// Pick과 Exclude를 합쳐서 만들어진 타입
 const sample2: Omit<Profile, "married"> = {
   name: "Lee",
   age: 28,
@@ -35,3 +36,43 @@ const sample3: P3<Profile, "name" | "age"> = {
   name: "Lee",
   age: 28,
 };
+
+// 04. Required
+// Optional을 필수로 만들 때 사용
+// - 기호를 통해 옵셔널을 제거하여 만들어짐
+type R<T> = {
+  [Key in keyof T]-?: T[Key];
+};
+const sample4: R<Profile> = {
+  name: "Lee",
+  age: 28,
+  married: false,
+};
+
+// 05. Readonly
+// 수정을 못하도록 설정해주는 타입
+type R2<T> = {
+  readonly [Key in keyof T]: T[Key];
+};
+const sample5: R2<Profile> = {
+  name: "Lee",
+  age: 28,
+  married: false,
+};
+// sample5.age = 'Kim'; -> Cannot assign to 'age' because it is a read-only property
+
+// 06. Record
+// [key: string]: number 형태로 사용하던 것을 Record<string, number>로 간단하게 사용 가능
+interface Obj {
+  [key: string]: number;
+}
+type R3<T extends keyof any, S> = {
+  [Key in T]: S;
+};
+const a4: R3<string, number> = { a: 3, b: 5, c: 7 };
+
+// 07. NonNullable
+// null과 undefined를 허용하기 싫을 때 사용
+type N<T> = T extends null | undefined ? never : T;
+type A2 = string | null | undefined | boolean | number;
+type B2 = N<A2>;
