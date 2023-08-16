@@ -76,3 +76,18 @@ const a4: R3<string, number> = { a: 3, b: 5, c: 7 };
 type N<T> = T extends null | undefined ? never : T;
 type A2 = string | null | undefined | boolean | number;
 type B2 = N<A2>;
+
+// 08. Parameters
+// 함수의 매개변수의 타입을 재활용 할 수 있게 해줌
+const zip = (x: number, y: string, z: boolean) => {
+  return { x, y, z };
+};
+
+// 09. infer
+// infer는 extends에서만 사용 가능
+// 매개변수 자리를 추론하도록 하는 키워드
+type P2<T extends (...args: any) => any> = T extends (...args: infer A) => any
+  ? A
+  : never;
+type Params = P2<typeof zip>;
+type First = Params[0];
